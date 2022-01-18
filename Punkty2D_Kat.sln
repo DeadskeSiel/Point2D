@@ -1,31 +1,138 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31624.102
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Punkty2D_Kat", "Punkty2D_Kat.vcxproj", "{8F78A71C-20DB-4329-A269-D75C6ECF76E5}"
-EndProject
-Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|x64 = Debug|x64
-		Debug|x86 = Debug|x86
-		Release|x64 = Release|x64
-		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8F78A71C-20DB-4329-A269-D75C6ECF76E5}.Debug|x64.ActiveCfg = Debug|x64
-		{8F78A71C-20DB-4329-A269-D75C6ECF76E5}.Debug|x64.Build.0 = Debug|x64
-		{8F78A71C-20DB-4329-A269-D75C6ECF76E5}.Debug|x86.ActiveCfg = Debug|Win32
-		{8F78A71C-20DB-4329-A269-D75C6ECF76E5}.Debug|x86.Build.0 = Debug|Win32
-		{8F78A71C-20DB-4329-A269-D75C6ECF76E5}.Release|x64.ActiveCfg = Release|x64
-		{8F78A71C-20DB-4329-A269-D75C6ECF76E5}.Release|x64.Build.0 = Release|x64
-		{8F78A71C-20DB-4329-A269-D75C6ECF76E5}.Release|x86.ActiveCfg = Release|Win32
-		{8F78A71C-20DB-4329-A269-D75C6ECF76E5}.Release|x86.Build.0 = Release|Win32
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {E3B09FE9-3C4C-412F-A3BD-DA4A683E2052}
-	EndGlobalSection
-EndGlobal
+/plik Punkt2.h
+
+/*! \file Punkt2.h
+*
+* \brief Zawiera deklaracj� klasy Punkt2
+*
+* Plik zawiera deklaracje klasy Punkt2.h.
+* Wsporzedne punktu sa podawane w uk�adzie kartezja�skim.
+* Klasa zawiera kilka metod skladowych
+*
+* \author Jan Nowak
+* \date 2000.0.01
+* \version 1.00.00
+*/
+
+#include <math.h>
+
+
+class Point2
+{
+	double x{ 0.0 };
+	double y{ 0.0 };
+	double r, sinA, cosA,tgA,atan2A;
+	
+
+public:
+	//settery
+	void setX(double _x);
+	void setY(double _y);
+
+	//gettery
+	double getX();
+	double getY();
+
+	//wsp�rz�dne biegunowe
+	double getRadius();
+	double getAngle();
+
+	//odleg�o�� punktu od punktu _p
+	double getDistance(Point2 _p);
+
+	double getRadius(double x, double y)
+	{
+		r = (x * x) + (y * y);
+		r = sqrt(r);
+
+		return r;
+	}
+
+	double getAngle(double x, double y)
+	{
+
+		sinA = y / r;
+		cosA = x / r;
+		tgA = y / x;
+
+		x = r * cosA;
+		y = r * sinA;
+
+		atan2A= atan2(y, x) * 180 / 3.14;
+
+		return sinA;
+	}
+
+};
+
+
+//plik Punkt2.cpp
+
+
+/*! \file Punkt2.cpp
+*
+* \brief Zawiera definicje klasy Punkt2
+*
+* Plik zawiera implementacje metod klasy Punkt2.
+*
+* \author Jan Nowak
+* \date 2000.0.01
+* \version 1.00.00
+*/
+
+//#include "Punkt2.h"
+
+void Point2::setX(double _x)
+{
+	x = _x;
+}
+
+void Point2::setY(double _y)
+{
+	y = _y;
+}
+
+double Point2::getX()
+{
+	return x;
+}
+
+double Point2::getY()
+{
+	return y;
+}
+
+
+
+//plik main.cpp
+
+/*! \file main.cpp
+*
+* \brief Kod programu testuj�cego klas� Punkt2
+*
+* Plik zawiera funkcj� main(),
+* w kt�rej wykonano kilka podstawowych test�w
+* dotycz�cych klasy Punkt2
+*
+* \author Jan Nowak
+* \date 2000.0.01
+* \version 1.00.00
+*/
+
+//#include 
+
+#include <iostream>
+
+int main()
+{
+	Point2 p1;
+	p1.setX(10.0);
+	p1.setY(5.0);
+
+	p1.getRadius(10.0, 5.0);
+	p1.getAngle(10.0,5.0);
+
+	cout << p1.getRadius(10.0, 5.0);
+
+	return 0;
+}
